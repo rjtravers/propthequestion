@@ -1,12 +1,9 @@
 <p>The game where friends, family and that crazy cousin can place prop bets on the impending nuptials of the lucky couple. There’s no better way to celebrate love than with a few friendly wagers!</p>
 
-<label for="name">Name (4 to 8 characters):</label>
+<button onclick="logClick()">Log a click!</button>
 
-<input
-  type="text"
-  id="name"
-  name="name"
-  required
-  minlength="4"
-  maxlength="8"
-  size="10" />
+<script>
+  function logClick() {
+    alert(new Date());
+  }
+</script>
