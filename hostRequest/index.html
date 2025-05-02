@@ -1,1 +1,26 @@
-<p>Rules for hosting, and other stuff goes here!</p>
+<p>So you're looking to add some wows to the vows? Craving thrills for the nuptial chills? Raise the stakes for the wedding cake? Looking to add some zing to the ring?</p>
+<p>You've come to the right place! As game host, you'll need to generate a unique Game ID that participants will use to find your game. We'll provide some basic questions to help you along, but you can also create questions to help customize your experience!</p>
+<p>Let's start with a unique Game ID. This is what participants will need to enter to find your game.</p>
+
+<form id="rsvpForm">
+  <input type="text" id="gameId" placeholder="Game ID"><br>
+  <input type="submit" value="Create">
+</form>
+
+<script>
+  document.getElementById("rsvpForm").addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
+  
+    const gameId = document.getElementById("gameId").value.trim();
+    if (!gameId) return alert("Please enter a Game ID.");
+  
+    push(ref(db, "rsvps/"), { gameId: gameId, timestamp: new Date().toISOString() })
+      .then(() => {
+        console.log("RSVP saved:", gameId);
+        document.getElementById("gameId").value = ""; // Clear the field
+      })
+      .catch((err) => {
+        console.error("Error writing RSVP:", err);
+      });
+  });
+</script>
