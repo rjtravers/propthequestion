@@ -9,12 +9,11 @@
     The game where friends, family, and that crazy cousin can place prop bets on the impending nuptials of the lucky couple. There’s no better way to celebrate love than with a few friendly wagers!
   </p>
 
-  <button id="myButton">Log a click!</button>
-
-  <form action="/action_page.php">
+  <form id="rsvpForm">
     <input type="text" id="gameId" placeholder="Enter your Game ID"><br>
     <input type="submit" value="RSVP">
-  </form> 
+  </form>
+
 
   <a href="hostRequest">I want to host a game!</a>
 
@@ -47,6 +46,29 @@
       .then(() => console.log("Pushed to Firebase:", timestamp))
       .catch((err) => console.error("Firebase write failed:", err));
   });
+
+
+
+  // Add gameID to db
+  document.getElementById("rsvpForm").addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
+  
+    const gameId = document.getElementById("gameId").value.trim();
+    if (!gameId) return alert("Please enter a Game ID.");
+  
+    push(ref(db, "rsvps/"), { gameId: gameId, timestamp: new Date().toISOString() })
+      .then(() => {
+        console.log("RSVP saved:", gameId);
+        document.getElementById("gameId").value = ""; // Clear the field
+      })
+      .catch((err) => {
+        console.error("Error writing RSVP:", err);
+      });
+  });
+
+
+
+  
 
   // Listen for new timestamps and add to DOM
   const timestampList = document.getElementById("timestampList");
