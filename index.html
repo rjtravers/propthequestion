@@ -11,8 +11,14 @@
 
   <button id="myButton">Log a click!</button>
 
-  <ul id="timestampList"></ul>
+  <form action="/action_page.php">
+    <input type="text" id="gameId" placeholder="Enter your Game ID"><br>
+    <input type="submit" value="RSVP">
+  </form> 
 
+  <a href="">I want to host a game!</a>
+
+  <ul id="timestampList"></ul>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
