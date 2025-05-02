@@ -1,10 +1,53 @@
-<p>The game where friends, family and that crazy cousin can place prop bets on the impending nuptials of the lucky couple. There’s no better way to celebrate love than with a few friendly wagers!</p>
+<head>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
 
-<button onclick="logClick()">Log a click!</button>
+</head>
+<body>
+    <p>The game where friends, family and that crazy cousin can place prop bets on the impending nuptials of the lucky couple. There’s no better way to celebrate love than with a few friendly wagers!</p>
+  
+    <button id="myButton" onclick="logClick()">Log a click!</button>
+    
+    <script>
+        function logClick() {
+            const date = new Date();
+            console.log(date)
+      }
+    </script>
 
-<script>
-  function logClick() {
-    const date = new Date();
-    console.log(date)
-  }
-</script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBe0YiLRSwk_qQujDG_f3aY_8nI9H_b1jc",
+        authDomain: "prop-the-question.firebaseapp.com",
+        databaseURL: "https://prop-the-question-default-rtdb.firebaseio.com",
+        projectId: "prop-the-question",
+        storageBucket: "prop-the-question.firebasestorage.app",
+        messagingSenderId: "699122354312",
+        appId: "1:699122354312:web:61e45226b38bb4cf72773d",
+        measurementId: "G-F7LQ277HDM"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
+
+    // On button click, write to Firebase
+    document.getElementById("myButton").addEventListener("click", () => {
+      const timestamp = new Date().toISOString();
+      push(ref(db, "timestamps/"), { time: timestamp });
+      console.log("Pushed to Firebase:", timestamp);
+    });
+      
+    </script>
+  
+</body>
