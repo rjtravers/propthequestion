@@ -15,6 +15,8 @@
   
     const gameId = document.getElementById("gameId").value.trim();
     if (!gameId) return alert("Please enter a Game ID.");
+
+    console.log('Creating a new game with gameId ' + gameId)
   
     push(ref(db, "rsvps/"), { gameId: gameId, timestamp: new Date().toISOString() })
       .then(() => {
