@@ -8,25 +8,3 @@
 </form>
 
 <script type="module" src="/propthequestion/site/script.js"></script>
-
-
-
-<script>
-  document.getElementById("rsvpForm").addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent form from reloading the page
-  
-    const gameId = document.getElementById("gameId").value.trim();
-    if (!gameId) return alert("Please enter a Game ID.");
-
-    console.log('Creating a new game with gameId ' + gameId)
-  
-    push(ref(db, "rsvps/"), { gameId: gameId, timestamp: new Date().toISOString() })
-      .then(() => {
-        console.log("RSVP saved:", gameId);
-        document.getElementById("gameId").value = ""; // Clear the field
-      })
-      .catch((err) => {
-        console.error("Error writing RSVP:", err);
-      });
-  });
-</script>
