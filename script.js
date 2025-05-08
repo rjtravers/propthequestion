@@ -17,10 +17,19 @@ document.getElementById("rsvpForm").addEventListener("submit", () => {
 
 // Listen for new timestamps and add to DOM
 const timestampList = document.getElementById("timestampList");
-const timestampsRef = ref(db, "timestamps/");
-onChildAdded(timestampsRef, (snapshot) => {
+// const timestampsRef = ref(db, "timestamps/");
+// onChildAdded(timestampsRef, (snapshot) => {
+//   const data = snapshot.val();
+//   const li = document.createElement("li");
+//   li.textContent = data.time;
+//   timestampList.appendChild(li);
+// });
+
+const gameIds = ref(db, "gameIds/");
+onChildAdded(gameIds, (snapshot) => {
   const data = snapshot.val();
   const li = document.createElement("li");
+  li.textContent = data.gameId;
   li.textContent = data.time;
-  timestampList.appendChild(li);
+  timestampList.appendChild(gameId, li);
 });
