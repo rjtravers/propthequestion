@@ -1,7 +1,7 @@
 getAnalytics(app);
 
 // Add timestamp to Firebase on button click
-document.getElementById("myButton").addEventListener("click", () => {
+document.getElementById("rsvpForm").addEventListener("submit", () => {
   const timestamp = new Date().toISOString();
   push(ref(db, "timestamps/"), { time: timestamp })
     .then(() => console.log("Pushed to Firebase:", timestamp))
