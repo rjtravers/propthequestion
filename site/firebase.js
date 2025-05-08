@@ -1,13 +1,6 @@
 // firebase.js (must be a module)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-
-import { 
-        ref,
-        push,
-        onChildAdded,
-        getDatabase 
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-
+import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
 const firebaseConfig = {
