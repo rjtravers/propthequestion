@@ -30,6 +30,5 @@ onChildAdded(gameIds, (snapshot) => {
   const data = snapshot.val();
   const li = document.createElement("li");
   li.textContent = data.gameId;
-  li.textContent = data.time;
-  timestampList.appendChild(gameId, li);
+  gameIds.appendChild(li);
 });
