@@ -1,6 +1,4 @@
-const app = initializeApp(firebaseConfig);
 getAnalytics(app);
-const db = getDatabase(app);
 
 // Add timestamp to Firebase on button click
 document.getElementById("myButton").addEventListener("click", () => {
