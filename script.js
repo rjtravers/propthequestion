@@ -1,4 +1,4 @@
-getAnalytics(app);
+// getAnalytics(app);
 
 // Add timestamp to Firebase on button click
 document.getElementById("rsvpForm").addEventListener("submit", () => {
