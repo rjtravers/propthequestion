@@ -7,7 +7,10 @@ import { ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6
 document.getElementById("rsvpForm").addEventListener("submit", () => {
   const timestamp = new Date().toISOString();
   const gameId = document.getElementById("gameId").value;
-  push(ref(db, "gameIds/"), { gameId: gameId })
+  push(ref(db, "gameIds/"), { 
+        gameId: gameId,
+        timestamp: timestamp
+      })
     .then(() => console.log("Pushed to Firebase:", gameId ))
     .catch((err) => console.error("Firebase write failed:", err));
 });
