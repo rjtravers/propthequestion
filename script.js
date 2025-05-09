@@ -20,34 +20,47 @@
 */
 
 import { db } from "/propthequestion/site/firebase.js";
-import { ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { ref, push, get, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 // Add timestamp to Firebase on button click
-document.getElementById("rsvpForm").addEventListener("submit", () => {
+document.getElementById("rsvpForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+
   const timestamp = new Date().toISOString();
   const gameId = document.getElementById("gameId").value;
-  push(ref(db, "gameIds/"), { 
+  const gameIdsRef = ref(db, "gameIds/");
+
+  try {
+    const snapshot = await get(gameIdsRef);
+    let exists = false;
+
+    snapshot.forEach((childSnap) => {
+      if (childSnap.val().gameId === gameId) {
+        exists = true;
+      }
+    });
+
+    if (exists) {
+      alert("Game ID already exists.");
+    } else {
+      await push(gameIdsRef, {
         gameId: gameId,
         timestamp: timestamp
-      })
-    .then(() => console.log("Pushed to Firebase:", gameId ))
-    .catch((err) => console.error("Firebase write failed:", err));
+      });
+      console.log("Pushed to Firebase:", gameId);
+      alert("Game ID added.");
+    }
+  } catch (error) {
+    console.error("Firebase read/write failed:", error);
+  }
 });
 
 // Listen for new timestamps and add to DOM
 const timestampList = document.getElementById("timestampList");
-// const timestampsRef = ref(db, "timestamps/");
-// onChildAdded(timestampsRef, (snapshot) => {
-//   const data = snapshot.val();
-//   const li = document.createElement("li");
-//   li.textContent = data.time;
-//   timestampList.appendChild(li);
-// });
-
-const gameIds = ref(db, "gameIds/");
-onChildAdded(gameIds, (snapshot) => {
+const timestampsRef = ref(db, "timestamps/");
+onChildAdded(timestampsRef, (snapshot) => {
   const data = snapshot.val();
   const li = document.createElement("li");
-  li.textContent = data.gameId;
+  li.textContent = data.time;
   timestampList.appendChild(li);
 });
