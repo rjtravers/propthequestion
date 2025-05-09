@@ -2,9 +2,9 @@ import { db } from './site/firebase.js';
 import { ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 // Add timestamp to Firebase on button click
-document.getElementById("form_createGame").addEventListener("submit", () => {
+document.getElementById("form_newGame").addEventListener("submit", () => {
   const timestamp = new Date().toISOString();
-  const gameId = document.getElementById("input_gameId").value;
+  const gameId = document.getElementById("input_newGameId").value;
   push(ref(db, "gameIds/"), { 
         gameId: gameId,
         timestamp: timestamp
@@ -14,7 +14,7 @@ document.getElementById("form_createGame").addEventListener("submit", () => {
 });
 
 // Listen for new timestamps and add to DOM
-const timestampList = document.getElementById("timestampList");
+const timestampList = document.getElementById("existingGameIds");
 // const timestampsRef = ref(db, "timestamps/");
 // onChildAdded(timestampsRef, (snapshot) => {
 //   const data = snapshot.val();
