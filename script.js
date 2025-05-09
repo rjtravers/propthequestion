@@ -20,13 +20,12 @@
 */
 
 import { db } from "/propthequestion/site/firebase.js";
-import { ref, set, get, child, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-// Add Game ID to Firebase on form submission
+// Check for Game ID in Firebase on form submission
 document.getElementById("rsvpForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const timestamp = new Date().toISOString();
   const gameId = document.getElementById("gameId").value.trim();
 
   if (!gameId) {
@@ -39,27 +38,13 @@ document.getElementById("rsvpForm").addEventListener("submit", async (event) => 
   try {
     const snapshot = await get(gameRef);
     if (snapshot.exists()) {
-      alert("Game ID already exists.");
+      alert("Game ID found.");
     } else {
-      await set(gameRef, { timestamp });
-      console.log("Game ID added:", gameId);
-      alert("Game ID successfully created.");
+      alert("That Game ID can't be found.");
     }
   } catch (error) {
-    console.error("Error accessing Firebase:", error);
-    alert("There was an error. Please try again.");
+    console.error("Error checking Game ID:", error);
+    alert("An error occurred. Please try again.");
   }
-});
-
-// Listen for new Game IDs and display them
-const timestampList = document.getElementById("timestampList");
-const gameIdsRef = ref(db, "gameIds/");
-
-onChildAdded(gameIdsRef, (snapshot) => {
-  const gameId = snapshot.key;
-  const data = snapshot.val();
-  const li = document.createElement("li");
-  li.textContent = `${gameId} — ${data.timestamp}`;
-  timestampList.appendChild(li);
 });
 
