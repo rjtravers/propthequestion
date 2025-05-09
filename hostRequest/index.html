@@ -4,22 +4,21 @@
         <meta charset="UTF-8">
         <title>Prop the Question</title>
         <link rel="icon" href="../favicon.ico" type="image/x-icon">
-
     </head>
     <body>
-      <p>So you're looking to add some wows to the vows? Craving thrills for the nuptial chills? Raise the stakes for the wedding cake? Looking to add some zing to the ring?</p>
-      <p>You've come to the right place! As game host, you'll need to generate a unique Game ID that participants will use to find your game. We'll provide some basic questions to help you along, but you can also create questions to help customize your experience!</p>
-      <p>Let's start with a unique Game ID. This is what participants will need to enter to find your game.</p>
-      
-      <form id="form_newGame">
-        <input type="text" id="input_newGameId" placeholder="Define your Game ID"><br>
-        <input type="submit" value="Create">
-      </form>
-
-      <div id="existingGameIds"></div>
-      
-      <script href="../site/firebase.js"></script>
-      <script href="script.js"></script>
-  
+        <p>So you're looking to add some wows to the vows? Craving thrills for the nuptial chills? Raise the stakes for the wedding cake? Looking to add some zing to the ring?</p>
+        <p>You've come to the right place! As game host, you'll need to generate a unique Game ID that participants will use to find your game. We'll provide some basic questions to help you along, but you can also create questions to help customize your experience!</p>
+        <p>Let's start with a unique Game ID. This is what participants will need to enter to find your game.</p>
+        
+        <form id="form_newGame">
+            <input type="text" id="input_newGameId" placeholder="Define your Game ID"><br>
+            <input type="submit" value="Create">
+        </form>
+        
+        <div id="existingGameIds"></div>
+        
+        <script type="module" src="../site/firebase.js"></script>
+        <script type="module" src="script.js"></script>
+        
     </body>
 </html>
