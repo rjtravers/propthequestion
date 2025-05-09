@@ -11,12 +11,15 @@
       <p>You've come to the right place! As game host, you'll need to generate a unique Game ID that participants will use to find your game. We'll provide some basic questions to help you along, but you can also create questions to help customize your experience!</p>
       <p>Let's start with a unique Game ID. This is what participants will need to enter to find your game.</p>
       
-      <form id="rsvpForm">
-        <input type="text" id="gameId" placeholder="Game ID"><br>
+      <form id="form_newGame">
+        <input type="text" id="input_newGameId" placeholder="Define your Game ID"><br>
         <input type="submit" value="Create">
       </form>
+
+      <div id="existingGameIds"></div>
       
       <script href="../site/firebase.js"></script>
+      <script href="script.js"></script>
   
     </body>
 </html>
