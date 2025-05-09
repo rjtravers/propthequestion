@@ -20,47 +20,46 @@
 */
 
 import { db } from "/propthequestion/site/firebase.js";
-import { ref, push, get, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { ref, set, get, child, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-// Add timestamp to Firebase on button click
+// Add Game ID to Firebase on form submission
 document.getElementById("rsvpForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const timestamp = new Date().toISOString();
-  const gameId = document.getElementById("gameId").value;
-  const gameIdsRef = ref(db, "gameIds/");
+  const gameId = document.getElementById("gameId").value.trim();
+
+  if (!gameId) {
+    alert("Please enter a valid Game ID.");
+    return;
+  }
+
+  const gameRef = ref(db, `gameIds/${gameId}`);
 
   try {
-    const snapshot = await get(gameIdsRef);
-    let exists = false;
-
-    snapshot.forEach((childSnap) => {
-      if (childSnap.val().gameId === gameId) {
-        exists = true;
-      }
-    });
-
-    if (exists) {
+    const snapshot = await get(gameRef);
+    if (snapshot.exists()) {
       alert("Game ID already exists.");
     } else {
-      await push(gameIdsRef, {
-        gameId: gameId,
-        timestamp: timestamp
-      });
-      console.log("Pushed to Firebase:", gameId);
-      alert("Game ID added.");
+      await set(gameRef, { timestamp });
+      console.log("Game ID added:", gameId);
+      alert("Game ID successfully created.");
     }
   } catch (error) {
-    console.error("Firebase read/write failed:", error);
+    console.error("Error accessing Firebase:", error);
+    alert("There was an error. Please try again.");
   }
 });
 
-// Listen for new timestamps and add to DOM
+// Listen for new Game IDs and display them
 const timestampList = document.getElementById("timestampList");
-const timestampsRef = ref(db, "timestamps/");
-onChildAdded(timestampsRef, (snapshot) => {
+const gameIdsRef = ref(db, "gameIds/");
+
+onChildAdded(gameIdsRef, (snapshot) => {
+  const gameId = snapshot.key;
   const data = snapshot.val();
   const li = document.createElement("li");
-  li.textContent = data.time;
+  li.textContent = `${gameId} — ${data.timestamp}`;
   timestampList.appendChild(li);
 });
+
