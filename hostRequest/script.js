@@ -14,13 +14,13 @@ document.getElementById("form_newGame").addEventListener("submit", () => {
 });
 
 // Listen for new Game IDs and display them
-const existingGameIds = document.getElementById("existingGameIds");
+const gameIdList = document.getElementById("gameIdList");
 const gameIdsRef = ref(db, "gameIds/");
 
 onChildAdded(gameIdsRef, (snapshot) => {
-  const gameId = snapshot.key;
   const data = snapshot.val();
   const li = document.createElement("li");
-  li.textContent = `${gameId} — ${data.timestamp}`;
-  existingGameIds.appendChild(li);
+  li.textContent = `${data.gameId} — ${data.timestamp}`;
+  gameIdList.appendChild(li);
 });
+
