@@ -1,4 +1,4 @@
-import { db } from './site/firebase.js';
+import { db } from "/propthequestion/site/firebase.js";
 import { ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 // Add timestamp to Firebase on button click
