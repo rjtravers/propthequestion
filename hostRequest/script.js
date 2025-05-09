@@ -13,12 +13,14 @@ document.getElementById("form_newGame").addEventListener("submit", () => {
     .catch((err) => console.error("Firebase write failed:", err));
 });
 
-// Listen for new games and add to DOM
+// Listen for new Game IDs and display them
 const existingGameIds = document.getElementById("existingGameIds");
-const gameIds = ref(db, "gameIds/");
-onChildAdded(gameIds, (snapshot) => {
+const gameIdsRef = ref(db, "gameIds/");
+
+onChildAdded(gameIdsRef, (snapshot) => {
+  const gameId = snapshot.key;
   const data = snapshot.val();
   const li = document.createElement("li");
-  li.textContent = data.gameId;
+  li.textContent = `${gameId} — ${data.timestamp}`;
   existingGameIds.appendChild(li);
 });
