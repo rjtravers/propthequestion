@@ -1,3 +1,5 @@
+alert('firebase.js loaded');
+
 // firebase.js (must be a module)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
