@@ -14,7 +14,7 @@ document.getElementById("form_newGame").addEventListener("submit", () => {
 });
 
 // Listen for new Game IDs and display them
-const gameIdList = document.getElementById("gameIdList");
+const gameIdList = document.getElementById("existingGameIds");
 const gameIdsRef = ref(db, "gameIds/");
 
 onChildAdded(gameIdsRef, (snapshot) => {
