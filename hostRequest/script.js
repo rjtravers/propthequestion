@@ -1,26 +1,38 @@
 import { db } from "/propthequestion/site/firebase.js";
-import { ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { ref, set, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-// Add timestamp to Firebase on button click
-document.getElementById("form_newGame").addEventListener("submit", () => {
+document.getElementById("form_newGame").addEventListener("submit", (e) => {
+  e.preventDefault();
+
   const timestamp = new Date().toISOString();
-  const gameId = document.getElementById("input_newGameId").value;
-  push(ref(db, "gameIds/"), { 
-        gameId: gameId,
-        timestamp: timestamp
-      })
-    .then(() => console.log("Pushed to Firebase:", gameId ))
-    .catch((err) => console.error("Firebase write failed:", err));
-});
+  const gameId = document.getElementById("input_newGameId").value.trim();
 
-// Listen for new Game IDs and display them
-const gameIdList = document.getElementById("existingGameIds");
-const gameIdsRef = ref(db, "gameIds/");
+  if (!gameId) {
+    alert("Please enter a Game ID");
+    return;
+  }
 
-onChildAdded(gameIdsRef, (snapshot) => {
-  const data = snapshot.val();
-  const li = document.createElement("li");
-  li.textContent = `${data.gameId} — ${data.timestamp}`;
-  gameIdList.appendChild(li);
-});
+  const gameRef = ref(db, "gameIds/" + gameId);
 
+  // Check if the Game ID already exists
+  get(gameRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        alert(`The Game ID "${gameId}" is already in use. Please choose a different one.`);
+      } else {
+        // Create the game entry
+        set(gameRef, { timestamp })
+          .then(() => {
+            console.log("Game ID created:", gameId);
+            alert(`Game "${gameId}" created successfully!`);
+          })
+          .catch((err) => {
+            console.error("Firebase write failed:", err);
+            alert("Something went wrong while creating your game. Please try again.");
+          });
+      }
+    })
+    .catch((err) => {
+      console.error("Firebase read failed:", err);
+      alert("A network or database error occurred. Please check your connection and try again.");
+    });
