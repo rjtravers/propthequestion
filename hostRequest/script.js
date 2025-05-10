@@ -36,3 +36,4 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
       console.error("Firebase read failed:", err);
       alert("A network or database error occurred. Please check your connection and try again.");
     });
+});
