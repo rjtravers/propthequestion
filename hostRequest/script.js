@@ -34,6 +34,7 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
           .then(() => {
             console.log("Game ID created:", gameId);
             alert(`Game "${gameId}" created successfully!`);
+            window.location.href = `questions.html?gameId=${encodeURIComponent(gameId)}`;
           })
           .catch((err) => {
             console.error("Firebase write failed:", err);
