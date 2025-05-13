@@ -1,3 +1,4 @@
+
 import { db } from "/propthequestion/site/firebase.js";
 import { ref, set, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
@@ -46,4 +47,14 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
       console.error("Firebase read failed:", err);
       alert("A network or database error occurred. Please check your connection and try again.");
     });
+
+    const params = new URLSearchParams(window.location.search);
+    const gameId = params.get("gameId");
+    
+    if (gameId) {
+      console.log("The Game ID pulled from the query string params is:", gameId);
+      // Use it however you want, e.g. display it or use in Firebase calls
+    } else {
+      console.warn("No Game ID found in query params.");
+    } 
 });
