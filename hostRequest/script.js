@@ -49,10 +49,10 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
     });
 
     const params = new URLSearchParams(window.location.search);
-    const gameId = params.get("gameId");
+    const paramsGameId = params.get("gameId");
     
-    if (gameId) {
-      console.log("The Game ID pulled from the query string params is:", gameId);
+    if (paramsGameId) {
+      console.log("The Game ID pulled from the query string params is:", paramsGameId);
       // Use it however you want, e.g. display it or use in Firebase calls
     } else {
       console.warn("No Game ID found in query params.");
