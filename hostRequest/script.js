@@ -6,9 +6,15 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
 
   const timestamp = new Date().toISOString();
   const gameId = document.getElementById("input_newGameId").value.trim();
+  const gamePassword = document.getElementById("input_newGamePassword").value.trim();
 
   if (!gameId) {
     alert("Please enter a Game ID");
+    return;
+  }
+
+  if (!gamePassword) {
+    alert("Please enter a game password");
     return;
   }
 
@@ -21,7 +27,10 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
         alert(`The Game ID "${gameId}" is already in use. Please choose a different one.`);
       } else {
         // Create the game entry
-        set(gameRef, { timestamp })
+        set(gameRef, { 
+            timestamp: timestamp,
+            gamePassword: gamePassword
+        })
           .then(() => {
             console.log("Game ID created:", gameId);
             alert(`Game "${gameId}" created successfully!`);
