@@ -3,7 +3,7 @@ const gameId = params.get("gameId");
 
 if (gameId) {
   console.log("Game ID:", gameId);
-  document.getElementById("gameIdDisplay").innerHtml = gameId;
+  document.getElementById("gameIdDisplay").textContent = gameId;
   // Use it however you want, e.g. display it or use in Firebase calls
 } else {
   console.warn("No Game ID found in query params.");
