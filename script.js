@@ -39,6 +39,7 @@ document.getElementById("rsvpForm").addEventListener("submit", async (event) => 
     const snapshot = await get(gameRef);
     if (snapshot.exists()) {
       alert("Game ID found.");
+      window.location.href = `gameLobby/index.html?gameId=${encodeURIComponent(gameId)}`;
     } else {
       alert("That Game ID can't be found.");
     }
