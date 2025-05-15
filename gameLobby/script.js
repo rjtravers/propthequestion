@@ -27,7 +27,7 @@ if (gameId) {
     console.warn("No Game ID found in query params.");
 }
 
-Document.getElementById("submitPropSheet").addEventListener("click", function() {
+document.getElementById("submitPropSheet").addEventListener("click", function() {
   console.log('clicked!');
   window.location.href = `submitPropSheet/index.html?gameId=${encodeURIComponent(gameId)}`;
 });
