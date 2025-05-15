@@ -13,7 +13,7 @@ if (gameId) {
         const data = snapshot.val();
         console.log("Game data:", data);
   
-        document.getElementById("gameIdDisplay").text = data.bride + " & " + data.groom + "'s"
+        document.getElementById("gameIdDisplay").textContent = data.bride + " & " + data.groom + "'s"
         
       } else {
         console.warn("Game ID not found in database.");
