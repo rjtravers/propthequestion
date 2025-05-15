@@ -27,6 +27,8 @@ if (gameId) {
     console.warn("No Game ID found in query params.");
 }
 
-// Document.getElementById("submitPropSheet").addEventListener("click", function() {
-//   console.log('clicked!');
-// });
+Document.getElementById("submitPropSheet").addEventListener("click", function() {
+  console.log('clicked!');
+  // window.location.href = `questions.html?gameId=${encodeURIComponent(gameId)}`;
+  window.location.href = `questions.html?gameId=Melchiorri`;
+});
