@@ -1,10 +1,27 @@
+import { db } from "/propthequestion/site/firebase.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
 const params = new URLSearchParams(window.location.search);
 const gameId = params.get("gameId");
 
 if (gameId) {
-  console.log("Game ID:", gameId);
-  document.getElementById("gameIdDisplay").textContent = gameId;
-  // Use it however you want, e.g. display it or use in Firebase calls
+  const gameRef = ref(db, "gameIds/" + gameId);
+
+  get(gameRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        console.log("Game data:", data);
+        // Do something with the data
+        // e.g., display it in the DOM
+      } else {
+        console.warn("Game ID not found in database.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching game data:", error);
+    });
+
 } else {
   console.warn("No Game ID found in query params.");
 }
