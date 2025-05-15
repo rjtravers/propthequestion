@@ -29,6 +29,5 @@ if (gameId) {
 
 Document.getElementById("submitPropSheet").addEventListener("click", function() {
   console.log('clicked!');
-  // window.location.href = `questions.html?gameId=${encodeURIComponent(gameId)}`;
-  window.location.href = `questions.html?gameId=Melchiorri`;
+  window.location.href = `submitPropSheet/index.html?gameId=${encodeURIComponent(gameId)}`;
 });
