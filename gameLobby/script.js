@@ -23,6 +23,10 @@ if (gameId) {
       console.error("Error fetching game data:", error);
     });
 
-} else {
-  console.warn("No Game ID found in query params.");
+  } else {
+    console.warn("No Game ID found in query params.");
 }
+
+// Document.getElementById("submitPropSheet").addEventListener("click", function() {
+//   console.log('clicked!');
+// });
