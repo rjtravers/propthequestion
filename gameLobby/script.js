@@ -30,5 +30,5 @@ if (gameId) {
 
 document.getElementById("submitPropSheet").addEventListener("click", function() {
   console.log('clicked!');
-  window.location.href = `../submitPropSheet/index.html?gameId=${encodeURIComponent(gameId)}`;
+  window.location.href = `propthequestion/submitPropSheet/index.html?gameId=${encodeURIComponent(gameId)}`;
 });
