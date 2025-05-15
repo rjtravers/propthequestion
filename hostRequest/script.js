@@ -8,6 +8,8 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
   const timestamp = new Date().toISOString();
   const gameId = document.getElementById("input_newGameId").value.trim();
   const gamePassword = document.getElementById("input_newGamePassword").value.trim();
+  const bride = document.getElementById("input_bride").value.trim();
+  const groom = document.getElementById("input_groom").value.trim();
 
   if (!gameId) {
     alert("Please enter a Game ID");
@@ -30,7 +32,9 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
         // Create the game entry
         set(gameRef, { 
             timestamp: timestamp,
-            gamePassword: gamePassword
+            gamePassword: gamePassword,
+            bride: bride,
+            groom: groom
         })
           .then(() => {
             console.log("Game ID created:", gameId);
