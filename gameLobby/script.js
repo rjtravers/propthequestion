@@ -12,8 +12,9 @@ if (gameId) {
       if (snapshot.exists()) {
         const data = snapshot.val();
         console.log("Game data:", data);
-        // Do something with the data
-        // e.g., display it in the DOM
+  
+        document.getElementById("gameIdDisplay").text = data.bride + " & " + data.groom + "'s"
+        
       } else {
         console.warn("Game ID not found in database.");
       }
