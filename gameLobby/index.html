@@ -7,13 +7,31 @@
     </head>
     <body>
 
-        <p>Welcome to <span id="gameIdDisplay"></span> game lobby!</p>
+        <h1>Welcome to <span id="gameIdDisplay"></span> game lobby!</h1>
 
         <img src="generic.jpg">
         
         <p>Will the bride cry? Will someone spill a drink? As the night unfolds, your game host can answer those questions and more in real time which will update the leaderboard below – all you need to do is...</p>
 
         <button id="submitPropSheet">Submit a prop sheet!</button>
+
+        // display number of questions answered, number of questions remaining
+        // cycle through declared answers, one at a time every 5-10 seconds
+
+        <div id="scoreboard">
+            <h2>Scoreboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Contestant</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
         
         <script type="module" src="/propthequestion/site/firebase.js"></script>
         <script type="module" src="/propthequestion/gameLobby/script.js"></script>
