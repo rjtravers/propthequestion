@@ -7,15 +7,31 @@ const gameId = params.get("gameId");
 if (!gameId) {
   console.error("No gameId found in query string.");
 } else {
-  const questionsRef = ref(db, "questions");
+  const gameQuestionsRef = ref(db, `gameQuestions/${gameId}`);
+  const allQuestionsRef = ref(db, "questions");
 
-  get(questionsRef)
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const questions = snapshot.val();
+  // Get the question IDs for this game
+  get(gameQuestionsRef)
+    .then((gameSnap) => {
+      if (!gameSnap.exists()) {
+        throw new Error(`No questions configured for gameId ${gameId}`);
+      }
+
+      const gameQuestionIds = Object.keys(gameSnap.val());
+
+      // Now fetch all questions
+      return get(allQuestionsRef).then((allSnap) => {
+        if (!allSnap.exists()) {
+          throw new Error("No questions exist in the database.");
+        }
+
+        const allQuestions = allSnap.val();
         const container = document.getElementById("questionsContainer");
 
-        Object.entries(questions).forEach(([qid, question]) => {
+        gameQuestionIds.forEach((qid) => {
+          const question = allQuestions[qid];
+          if (!question) return; // Skip missing questions
+
           const wrapper = document.createElement("div");
           wrapper.innerHTML = `
             <label>${question.text}</label><br>
@@ -25,11 +41,9 @@ if (!gameId) {
           `;
           container.appendChild(wrapper);
         });
-      } else {
-        console.warn("No questions found in database.");
-      }
+      });
     })
     .catch((err) => {
-      console.error("Error loading questions:", err);
+      console.error("Error loading game questions:", err.message);
     });
 }
