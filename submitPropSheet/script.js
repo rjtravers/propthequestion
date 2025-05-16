@@ -7,7 +7,7 @@ const gameId = params.get("gameId");
 if (!gameId) {
   console.error("No gameId found in query string.");
 } else {
-  const gameQuestionsRef = ref(db, `gameQuestions/${gameId}`);
+  const gameQuestionsRef = ref(db, `gameIds/${gameId}/questions`);
   const allQuestionsRef = ref(db, "questions");
 
   // Get the question IDs for this game
