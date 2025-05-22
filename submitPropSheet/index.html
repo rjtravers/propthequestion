@@ -5,9 +5,13 @@
         <title>Prop the Question</title>
         <link rel="icon" href="../favicon.ico" type="image/x-icon">
     </head>
-    <body>       
-        
-        <div id="questionsContainer"></div>
+    <body>
+        <form>
+            <label for="contestant">Contestant:</label>
+            <input type="text" id="contestant" name="contestant"></input>            
+            <div id="questionsContainer"></div>            
+             <button type="button" onclick="handleSubmit()">Submit my prop sheet!</button>
+        </form>
         
         <script type="module" src="/propthequestion/site/firebase.js"></script>
         <script type="module" src="/propthequestion/submitPropSheet/script.js"></script>
