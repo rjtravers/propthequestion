@@ -45,17 +45,10 @@ if (!gameId) {
     })
     .catch((err) => {
       console.error("Error loading game questions:", err.message);
-    });
+    });  
+}
 
-  function handleSubmit() {
-    const contestant = document.getElementById("contestant").text;
-
-    console.log(contestant);
-
-
-
-    
-  }
-
-  
+function handleSubmit() {
+  const contestant = document.getElementById("contestant").text;
+  console.log(contestant);    
 }
