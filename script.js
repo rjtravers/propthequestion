@@ -21,6 +21,12 @@
 
 import { db } from "/propthequestion/site/firebase.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { getAuth, signInAnonymously } from "firebase/auth";
+
+const auth = getAuth();
+signInAnonymously(auth)
+  .then(() => console.log("Signed in anonymously"))
+  .catch((error) => console.error("Auth error", error));
 
 // Check for Game ID in Firebase on form submission
 document.getElementById("rsvpForm").addEventListener("submit", async (event) => {
