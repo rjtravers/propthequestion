@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBe0YiLRSwk_qQujDG_f3aY_8nI9H_b1jc",
@@ -14,7 +15,19 @@ const firebaseConfig = {
   measurementId: "G-F7LQ277HDM"
 };
 
+// Init core services
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
 
-export { db };
+// Sign in anonymously so rules can check auth.uid
+signInAnonymously(auth)
+  .then(() => {
+    console.log("Signed in anonymously:", auth.currentUser?.uid);
+  })
+  .catch((error) => {
+    console.error("Auth error:", error);
+  });
+
+export { db, auth };
