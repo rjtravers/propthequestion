@@ -19,8 +19,10 @@
   📚 https://firebase.google.com/docs/web/learn-more#modular-version
 */
 
-import { db } from "/propthequestion/site/firebase.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import { db, auth } from "/propthequestion/site/firebase.js";
+import { ref, get, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+// now auth is defined here
 
 // Check for Game ID in Firebase on form submission
 document.getElementById("rsvpForm").addEventListener("submit", async (event) => {
