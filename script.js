@@ -19,7 +19,7 @@
   📚 https://firebase.google.com/docs/web/learn-more#modular-version
 */
 
-import { db, auth } from "/propthequestion/site/firebase.js";
+import { db, auth } from "./site/firebase.js";
 import { ref, get, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 // now auth is defined here
