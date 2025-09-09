@@ -34,7 +34,8 @@ document.getElementById("form_newGame").addEventListener("submit", (e) => {
             timestamp: timestamp,
             gamePassword: gamePassword,
             bride: bride,
-            groom: groom
+            groom: groom,
+            owner: auth.currentUser.uid
         })
           .then(() => {
             console.log("Game ID created:", gameId);
